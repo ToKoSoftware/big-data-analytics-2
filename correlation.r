@@ -16,31 +16,7 @@ korr_tab = cor(subset_cor)
 korr_tab
 write.csv(korr_tab, file = "Korrelationstabelle.csv", sep = ";")
 
-
-# Schwarze haben einen geringeren Stundenlohn als Weiße (black, wage)
-wage_black = summary(lm(dat$wage~dat$black))
-wage_black$coefficients
-plot(dat$wage, dat$black)
-cor(dat$wage, dat$black)
-# -> Schwach negativ korreliert -> "Umso weniger ich verdiene, umso eher bin ich schwarz"
-
-#- Hoher IQ bzw. KWW = hohes Einkommen
-IQ_wage = summary(lm(dat$IQ~dat$wage))
-IQ_wage
-plot(dat$IQ, dat$wage)
-cor(dat$IQ, dat$wage)
-# -> keine Korrelation
-
-#- many years of schooling = hohes Einkommen
-educ_wage = summary(lm(dat$educ~dat$wage))
-educ_wage
-plot(dat$educ, dat$wage)
-cor(dat$educ, dat$wage)
-# -> Mittel positiv korreliert -> "Umso länger ich in der Schule war, umso mehr verdiene ich"
-
-#- Hohe Bildung der Eltern (fatheduc, motheduc) = hohe years of schooling 
-#- ältere Leute = erfahrener = höheres Einkommen
-#- Kinder die bei beiden Elternteilen aufgewachsen sind = hohe years of schooling 
-#- 4 Jahre College = hohes Einkommen
-#- married = geringeres Einkommen wegen weniger Überstunden und keine Lust zu Reisen
-#- Bücherei Karte = many years of schooling 
+# Zusammenhang zwischen Einkommen und den Faktoren Schwarz und Bildung
+wage_from_black_and_educ = summary(lm(wage~black+educ, data = dat))
+wage_from_black_and_educ
+# -> Beides hoch signifikant
